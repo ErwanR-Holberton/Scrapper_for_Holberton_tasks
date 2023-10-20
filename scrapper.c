@@ -254,7 +254,6 @@ int main(void)
 			break;
 		main = get_main();
 
-		printf("loop %d\n", i);
 		if (main != NULL)
 		{
 			create_main_and_print_code(main);
