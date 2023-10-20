@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 FILE *my_open(char *name, char *mode)
 {
 	FILE *file = fopen(name, mode);
@@ -201,7 +202,9 @@ void file(char *file_name)
 	strcat(name, "\0");
 
 	file = my_open(name, "w+");
-	fprintf(file, "#!/usr/bin/python3\n");
+	if (strlen(file_name) > 2)
+		if (file_name[strlen(file_name)-2] == 'p' && file_name[strlen(file_name)-1] == 'y')
+			fprintf(file, "#!/usr/bin/python3\n");
 	fclose(file);
 	free(name);
 }
@@ -232,23 +235,26 @@ void create_file()
 	char *file_name = NULL;
 
 	file_name = get_str("<li>File: <code>", "</code></li>");
-	detect_double_files(file_name);
+	if (file_name != NULL)
+		detect_double_files(file_name);
 
 }
 int main(void)
 {
 	FILE *source = my_open("files/class_containing_tasks.html", "r");
 	char *main = NULL, c;
+	int i = 0;
 
 	system("rm output/*");
 
 	do {
-
+		i++;
 		c = get_task(source);
 		if (c == 0)
 			break;
 		main = get_main();
 
+		printf("loop %d\n", i);
 		if (main != NULL)
 		{
 			create_main_and_print_code(main);
