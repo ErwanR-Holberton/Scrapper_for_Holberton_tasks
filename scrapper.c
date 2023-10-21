@@ -25,6 +25,8 @@ char test_tag(char c, char *tag, FILE *file)
 		if (tag[count] == '\0')
 			break;
 		c = fgetc(file);
+		/*if (c == EOF)
+			return 0;*/
 	}
 	if (count == strlen(tag))
 		return (1);
@@ -189,7 +191,7 @@ char create_main_and_print_code(char *main)
 void file(char *file_name)
 {
 	FILE *file;
-	char *name = NULL;
+	char *name = NULL, *def = NULL;
 
 	name = malloc(strlen("output/") + strlen(file_name) + 1);
 
@@ -202,9 +204,14 @@ void file(char *file_name)
 	strcat(name, "\0");
 
 	file = my_open(name, "w+");
+	def = get_str(" <code>def", "</code>");
 	if (strlen(file_name) > 2)
 		if (file_name[strlen(file_name)-2] == 'p' && file_name[strlen(file_name)-1] == 'y')
+		{
 			fprintf(file, "#!/usr/bin/python3\n");
+			if (def != NULL)
+				fprintf(file,"def%s\n", def);
+		}
 	fclose(file);
 	free(name);
 }
@@ -239,8 +246,144 @@ void create_file()
 		detect_double_files(file_name);
 
 }
+char *find_user_name(FILE *task)
+{
+	char c, user[50], *username;
+	int i = 0;
+
+	while ((c = fgetc(task)) != EOF)
+	{
+		if (test_tag(c, "<pre><code>", task))
+		{
+			while ((c = fgetc(task)) != EOF)
+			{
+				if (c == '\n')
+					return (NULL);
+				if (test_tag(c, "$ cat", task))
+					break;
+				user[i] = c;
+				i++;
+			}
+			user[i] = '\0';
+			username = malloc(strlen(user) + 1);
+			strcpy(username, user);
+			username[i] = '\0';
+			return (username);
+		}
+	}
+	return (NULL);
+}
+void create_file_print_code(char *file_name, char *username, FILE *task)
+{
+	FILE *file;
+	char *name = malloc(strlen("output/") + strlen(file_name) + 1), c;
+
+	if (name == NULL)
+		exit(1);
+
+	name[0] = '\0';
+	strcat(name, "output/");
+	strcat(name, file_name);
+	strcat(name, "\0");
+	file = my_open(name, "w+");
+	free(name);
+
+
+	while ((c = fgetc(task)) != EOF)
+	{
+		if (test_tag(c, username, task))
+			break;
+		fprintf(file, "%c", c);
+	}
+	free(username);
+	fclose(file);
+}
+void get_all_cats()
+{
+	FILE *task = my_open("files/task.txt", "r");
+	char c, name[200], *str = NULL;
+	int i = 0;
+
+	str = find_user_name(task);
+	if (str == NULL)
+		return;
+	/*printf("user: %s\n", str);*/
+	fseek(task, -5, SEEK_CUR);
+	while ((c = fgetc(task)) != EOF)
+	{
+		if (test_tag(c, "$ cat ", task))
+		{
+			while ((c = fgetc(task)) != EOF)
+			{
+				if (c == '\n')
+					break;
+				name[i] = c;
+				i++;
+			}
+			name[i] = '\0';
+			i = 0;
+
+			/*printf("file: %s\n", name);*/
+			create_file_print_code(name, str, task);
+		}
+	}
+	fclose(task);
+}
+void clean_task()
+{
+	FILE *task, *copy;
+	char c;
+
+	system("touch files/copy.txt");
+	task = my_open("files/task.txt", "r");
+	copy = my_open("files/copy.txt", "w+");
+
+	while ((c = fgetc(task)) != EOF)
+	{
+		/*printf("%d ", c);*/
+		if (test_tag(c, "&gt;", task))
+			fprintf(copy, ">");
+		else
+			fprintf(copy, "%c", c);
+	}
+
+	fclose(task);
+	fclose(copy);
+
+	system("mv files/copy.txt files/task.txt");
+}
+void clean_html()
+{
+	FILE *task, *copy;
+	char c;
+
+	system("touch files/copy.txt");
+	task = my_open("files/class_containing_tasks.html", "r");
+	copy = my_open("files/copy.txt", "w+");
+
+	while ((c = fgetc(task)) != EOF)
+	{
+		if (test_tag(c, "&gt;", task))
+			fprintf(copy, ">");
+		else if (test_tag(c, "&amp;", task))
+			fprintf(copy, "&");
+		else if (test_tag(c, "&quot;", task))
+			fprintf(copy, "\"");
+		else if (test_tag(c, "&lt;", task))
+			fprintf(copy, "<");
+		else
+			fprintf(copy, "%c", c);
+	}
+
+	fclose(task);
+	fclose(copy);
+
+	system("mv files/copy.txt files/class_containing_tasks.html");
+}
 int main(void)
 {
+	clean_html();
+	
 	FILE *source = my_open("files/class_containing_tasks.html", "r");
 	char *main = NULL, c;
 	int i = 0;
@@ -252,14 +395,16 @@ int main(void)
 		c = get_task(source);
 		if (c == 0)
 			break;
-		main = get_main();
+		clean_task();
+		get_all_cats();
+		/*main = get_main();
 
 		if (main != NULL)
 		{
 			create_main_and_print_code(main);
 			free(main);
 			main = NULL;
-		}
+		}*/
 		create_file();
 	} while (1);
 	system("chmod u+x output/*.py");
