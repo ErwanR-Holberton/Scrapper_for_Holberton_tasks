@@ -325,6 +325,8 @@ void clean_html()
 			fprintf(copy, "%c", '"');
 		else if (test_tag(c, "&times;", task))
 			fprintf(copy, "%c", '*');
+		else if (test_tag(c, "&rsquo;", task))
+			fprintf(copy, "%c", '\'');
 		else
 			fprintf(copy, "%c", c);
 	}
