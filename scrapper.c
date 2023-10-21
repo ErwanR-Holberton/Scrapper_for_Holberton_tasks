@@ -61,64 +61,6 @@ char get_task(FILE *source)
 	fclose(task);
 	return (0);
 }
-char *gpt_get_str(char *tag_start, char *tag_end)
-{
-	FILE *task = my_open("files/task.txt", "r");
-	char c;
-	int i = 0;
-	char *str = NULL;
-	int inTag = 0;
-
-	printf("start gpt\n");
-
-	while ((c = fgetc(task)) != EOF)
-	{
-		printf("loop\n");
-		if (inTag)
-		{
-			if (test_tag(c, tag_end, task))
-			{
-				break;  // End tag found, exit the loop
-			}
-		}
-		else if (test_tag(c, tag_start, task))
-		{
-			inTag = 1;  // Start tag found, start reading content
-		}
-		else if (inTag)
-		{
-			if (i == 0)
-			{
-				str = malloc(200);  // Allocate initial buffer
-				if (str == NULL)
-				{
-					perror("malloc");
-					exit(1);
-				}
-			}
-			str[i++] = c;
-
-			// Check if the buffer is full, and if so, reallocate it
-			if (i % 200 == 0)
-			{
-				str = realloc(str, i + 200);
-				if (str == NULL)
-				{
-					perror("realloc");
-					exit(1);
-				}
-			}
-		}
-	}
-
-	if (str != NULL)
-	{
-		str[i] = '\0';  // Null-terminate the string
-	}
-
-	fclose(task);
-	return str;  // Return the string (or NULL if not found)
-}
 char *get_str(char *tag_start, char *tag_end)
 {
 	FILE *task = my_open("files/task.txt", "r");
@@ -212,6 +154,8 @@ void file(char *file_name)
 			if (def != NULL)
 				fprintf(file,"def%s\n", def);
 		}
+
+	free(def);
 	fclose(file);
 	free(name);
 }
@@ -219,7 +163,6 @@ void detect_double_files(char *file_name)
 {
 	int len = strlen(file_name), i;
 	char *copy = file_name;
-
 
 	for (i = 0; i < len; i++)
 	{
@@ -244,6 +187,8 @@ void create_file()
 	file_name = get_str("<li>File: <code>", "</code></li>");
 	if (file_name != NULL)
 		detect_double_files(file_name);
+
+	free(file_name);
 
 }
 char *find_user_name(FILE *task)
@@ -295,7 +240,7 @@ void create_file_print_code(char *file_name, char *username, FILE *task)
 			break;
 		fprintf(file, "%c", c);
 	}
-	free(username);
+
 	fclose(file);
 }
 void get_all_cats()
@@ -327,6 +272,7 @@ void get_all_cats()
 			create_file_print_code(name, str, task);
 		}
 	}
+	free(str);
 	fclose(task);
 }
 void clean_task()
@@ -383,9 +329,9 @@ void clean_html()
 int main(void)
 {
 	clean_html();
-	
+
 	FILE *source = my_open("files/class_containing_tasks.html", "r");
-	char *main = NULL, c;
+	char c;
 	int i = 0;
 
 	system("rm output/*");
