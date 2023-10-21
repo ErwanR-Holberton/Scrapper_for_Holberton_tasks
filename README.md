@@ -72,4 +72,186 @@
 <details>
 <summary>Click to see: Tasks</summary>
 
-</details>
+
+      <div class="panel panel-default task-card " id="task-19498">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      0. Lookup
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19499">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      1. My list
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19500">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      2. Exact same object
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19501">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      3. Same class or inherit from
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19502">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      4. Only sub class of
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19503">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      5. Geometry module
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19504">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      6. Improve Geometry
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19505">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      7. Integer validator
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19506">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      8. Rectangle
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19507">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      9. Full rectangle
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19508">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      10. Square #1
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19509">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      11. Square #2
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          mandatory
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19510">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      12. My integer
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          #advanced
+        </span>
+    
+      <div class="panel panel-default task-card " id="task-19511">
+  <span id="user_id" data-id="6218"></span>
+
+  <div class="panel-heading panel-heading-actions">
+    <h3 class="panel-title">
+      13. Can I?
+    </h3>
+
+    <div>
+        <span class="label label-info">
+          #advanced
+        </span>
+    </details>
