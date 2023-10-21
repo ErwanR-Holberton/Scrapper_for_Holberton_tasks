@@ -317,6 +317,14 @@ void clean_html()
 			fprintf(copy, "%c", '"');
 		else if (test_tag(c, "&lt;", task))
 			fprintf(copy, "%c", '<');
+		else if (test_tag(c, "&#39;", task))
+			fprintf(copy, "%c", '&');
+		else if (test_tag(c, "&ldquo;", task))
+			fprintf(copy, "%c", '"');
+		else if (test_tag(c, "&rdquo;", task))
+			fprintf(copy, "%c", '"');
+		else if (test_tag(c, "&times;", task))
+			fprintf(copy, "%c", '*');
 		else
 			fprintf(copy, "%c", c);
 	}
