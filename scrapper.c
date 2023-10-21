@@ -310,13 +310,13 @@ void clean_html()
 	while ((c = fgetc(task)) != EOF)
 	{
 		if (test_tag(c, "&gt;", task))
-			fprintf(copy, ">");
+			fprintf(copy, "%c", '>');
 		else if (test_tag(c, "&amp;", task))
-			fprintf(copy, "&");
+			fprintf(copy, "%c", '&');
 		else if (test_tag(c, "&quot;", task))
-			fprintf(copy, "\"");
+			fprintf(copy, "%c", '"');
 		else if (test_tag(c, "&lt;", task))
-			fprintf(copy, "<");
+			fprintf(copy, "%c", '<');
 		else
 			fprintf(copy, "%c", c);
 	}
