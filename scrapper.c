@@ -135,6 +135,8 @@ void file(char *file_name)
 	FILE *file;
 	char *name = NULL, *def = NULL;
 
+	if (file_name[strlen(file_name) - 1] == '/')
+		return;
 	name = malloc(strlen("output/") + strlen(file_name) + 1);
 
 	if (name == NULL)
@@ -186,7 +188,10 @@ void create_file()
 
 	file_name = get_str("<li>File: <code>", "</code></li>");
 	if (file_name != NULL)
+	{
 		detect_double_files(file_name);
+
+	}
 
 	free(file_name);
 
@@ -348,10 +353,12 @@ int main(void)
 
 	do {
 		i++;
+
 		c = get_task(source);
 		if (c == 0)
 			break;
 		clean_task();
+
 		get_all_cats();
 		/*main = get_main();
 
