@@ -350,6 +350,7 @@ int main(void)
 	int i = 0;
 
 	system("rm output/*");
+	system("mkdir output");
 
 	do {
 		i++;
