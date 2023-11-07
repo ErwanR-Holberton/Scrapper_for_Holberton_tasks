@@ -64,7 +64,7 @@ char get_task(FILE *source)
 char *get_str(char *tag_start, char *tag_end)
 {
 	FILE *task = my_open("files/task.txt", "r");
-	char c, main[200], *str = NULL;
+	char c, main[1000], *str = NULL;
 	int i = 0;
 
 	while ((c = fgetc(task)) != EOF)
@@ -354,7 +354,6 @@ int main(void)
 
 	do {
 		i++;
-
 		c = get_task(source);
 		if (c == 0)
 			break;
