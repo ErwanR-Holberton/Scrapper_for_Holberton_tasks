@@ -209,7 +209,7 @@ char *find_user_name(FILE *task)
 			{
 				if (c == '\n')
 					return (NULL);
-				if (test_tag(c, "$ cat", task))
+				if (test_tag(c, "$", task))
 					break;
 				user[i] = c;
 				i++;
