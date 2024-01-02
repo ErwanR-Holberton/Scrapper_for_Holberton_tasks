@@ -152,7 +152,7 @@ void file(char *file_name)
 	if (strlen(file_name) > 2)
 		if (file_name[strlen(file_name)-2] == 'p' && file_name[strlen(file_name)-1] == 'y')
 		{
-			fprintf(file, "#!/usr/bin/python3\n");
+			fprintf(file, "#!/usr/bin/env python3\n");
 			if (def != NULL)
 				fprintf(file,"def%s\n", def);
 		}
